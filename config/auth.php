@@ -18,6 +18,21 @@ return [
         'passwords' => 'users',
     ],
 
+    'admin' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class,
+    ],
+
+    'client' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Client::class,
+    ],
+
+    'seller' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Seller::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -39,6 +54,21 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'client',
+        ],
+
+        'seller' => [
+            'driver' => 'session',
+            'provider' => 'seller',
         ],
     ],
 
@@ -63,6 +93,24 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+
+
+        'clients' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Client::class,
+        ],
+
+
+        'sellers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Seller::class,
         ],
 
         // 'users' => [
@@ -96,6 +144,21 @@ return [
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Admin::class,
+        ],
+
+        'clients' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Client::class,
+        ],
+
+        'sellers' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Seller::class,
         ],
     ],
 
