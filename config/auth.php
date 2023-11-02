@@ -58,17 +58,17 @@ return [
 
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admin',
+            'provider' => 'admins',
         ],
 
         'client' => [
             'driver' => 'session',
-            'provider' => 'client',
+            'provider' => 'clients',
         ],
 
         'seller' => [
             'driver' => 'session',
-            'provider' => 'seller',
+            'provider' => 'sellers',
         ],
     ],
 
