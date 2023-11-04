@@ -35,12 +35,21 @@ class AdminController extends Controller
         }
 
         //cheak email/username and password in table admins
-
         $creds = array(
             $feldtype => $request->login_id,
             'password' => $request->password,
         );
         if (Auth::guard('admin')->attempt($creds)) {
+            $remmber_me = $request->remmber_me;
+            $email = $request->login_id;
+            $password = $request->password;
+            if (isset($remmber_me) && $remmber_me != '') {
+                setcookie('email', $email, time() + 3600);
+                setcookie('password', $password, time() + 3600);
+            } else {
+                setcookie('email', '');
+                setcookie('password', '');
+            }
             return redirect()->route('admin.home');
         } else {
             session()->flash('fail', 'Incrrect Credeantails');
@@ -48,11 +57,22 @@ class AdminController extends Controller
         }
     }
 
-
+    //////////
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
-        session()->flash('fail', 'You are logg ed out !!');
+        session()->flash('fail', 'You are logged out !!');
         return redirect()->route('admin.login');
     }
+
+    //////////
+    public function forgetPassword(Request $request)
+    {
+        return view('back.pages.admin.auth.forget-password');
+    }
+    public function forgetPasswordPost(Request $request)
+    {
+
+    }
+
 }

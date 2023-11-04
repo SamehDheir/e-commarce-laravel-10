@@ -21,35 +21,39 @@
 
             <div class="input-group custom">
                 <input type="text" class="form-control form-control-lg" placeholder="Username" name="login_id"
-                    value="{{ old('login_id') }}" />
+                    value="{{ isset($_COOKIE['email']) ? $_COOKIE['email'] : old('login_id') }}" />
                 <div class="input-group-append custom">
                     <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                 </div>
             </div>
             @error('login_id')
-                <span class="text-danger" style="margin-top: -20px; margin-bottom: 30px; display: block">{{ $message }}</span>
+                <span class="text-danger"
+                    style="margin-top: -20px; margin-bottom: 30px; display: block">{{ $message }}</span>
             @enderror
 
             <div class="input-group custom">
-                <input type="password" class="form-control form-control-lg" placeholder="**********" name="password" />
+                <input type="password" class="form-control form-control-lg"
+                    @if (isset($_COOKIE['password'])) value="{{ $_COOKIE['password'] }}" @endif placeholder="**********"
+                    name="password" />
                 <div class="input-group-append custom">
                     <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                 </div>
             </div>
 
             @error('password')
-                <span class="text-danger" style="margin-top: -20px; margin-bottom: 30px; display: block">{{ $message }}</span>
+                <span class="text-danger"
+                    style="margin-top: -20px; margin-bottom: 30px; display: block">{{ $message }}</span>
             @enderror
             <div class="row pb-30">
                 <div class="col-6">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                        <input type="checkbox" name="remmber_me" class="custom-control-input" id="customCheck1" />
                         <label class="custom-control-label" for="customCheck1">Remember</label>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="forgot-password">
-                        <a href="forgot-password.html">Forgot Password</a>
+                        <a href="#">Forgot Password</a>
                     </div>
                 </div>
             </div>
