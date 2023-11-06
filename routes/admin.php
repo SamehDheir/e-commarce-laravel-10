@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ForgetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['guest:admin'])->group(function () {
-        Route::view('/login', 'back.pages.admin.auth.login')->name('login');
-        Route::post('/login_handler',[AdminController::class, 'loginHandler'])->name('login_handler');
-        // Route::get('/forget-password', [AdminController::class, 'forgetPassword'])->name('forgetPassword');
+        Route::get('/login', [AdminController::class, 'login'])->name('login');
+        Route::post('/login_handler', [AdminController::class, 'loginHandler'])->name('login_handler');
+        Route::get('/forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('forgetPassword');
+        Route::post('/forget-password-post', [ForgetPasswordController::class, 'forgetPasswordPost'])->name('forgetPasswordPost');
+        Route::get('/rest-password-page', [ForgetPasswordController::class, 'restPasswordPage'])->name('restPasswordPage');
+        Route::post('/forget-password-reset', [ForgetPasswordController::class, 'forgetPasswordReset'])->name('forgetPasswordReset');
     });
     Route::middleware(['auth:admin'])->group(function () {
         Route::view('/home', 'back.pages.admin.home')->name('home');

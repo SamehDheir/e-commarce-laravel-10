@@ -19,6 +19,13 @@
                 </div>
             @endif
 
+            @if (Session::get('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ Session::get('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="input-group custom">
                 <input type="text" class="form-control form-control-lg" placeholder="Username" name="login_id"
                     value="{{ isset($_COOKIE['email']) ? $_COOKIE['email'] : old('login_id') }}" />
@@ -53,7 +60,7 @@
                 </div>
                 <div class="col-6">
                     <div class="forgot-password">
-                        <a href="#">Forgot Password</a>
+                        <a href="{{ route('admin.forgetPassword') }}">Forgot Password</a>
                     </div>
                 </div>
             </div>
