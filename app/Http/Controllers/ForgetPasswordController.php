@@ -28,6 +28,7 @@ class ForgetPasswordController extends Controller
             $admin->token = Str::random(40);
             $admin->save();
             FacadesMail::to($admin->email)->send(new ForgetPasswordMail($admin));
+            return view('back.pages.admin.mail.verifyEmail', compact('admin'));
         } elseif (empty($request->email)) {
             session()->flash('fail', 'Please, Enter Email');
             return redirect()->back();
@@ -46,17 +47,18 @@ class ForgetPasswordController extends Controller
     }
 
     /////////
+
     public function forgetPasswordReset(Request $request)
     {
         $admin = Admin::where('email', $request->email)->first();
-        if (!empty($admin)) {
+        if (!empty($request->email)) {
             if ($request->password == $request->confirm_password) {
                 $admin->password = Hash::make($request->password);
                 $admin->save();
                 session()->flash('success', 'The password has been changed successfully');
-                return route('admin.login');
+                return redirect()->route('admin.login');
             } else {
-                session()->flash('fail', 'The password Must Me Similar To The Confirmation Password');
+                session()->flash('fail', 'The passwords are not the same');
                 return redirect()->back();
             }
         } else {

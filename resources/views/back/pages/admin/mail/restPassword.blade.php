@@ -125,7 +125,7 @@
 <body>
     <div class="mainDiv">
         <div class="cardStyle">
-            <form action="{{ route('admin.forgetPasswordPost') }}" method="post" name="signupForm" id="signupForm">
+            <form action="{{ route('admin.forgetPasswordReset') }}" method="post" name="signupForm" id="signupForm">
                 @csrf
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwcP9qaLwl8q2VJXPCPY-AzopFHG54BGl3bw&usqp=CAU"
                     id="signupLogo" />

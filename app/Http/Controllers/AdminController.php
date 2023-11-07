@@ -10,10 +10,13 @@ use function Laravel\Prompts\password;
 class AdminController extends Controller
 {
 
-    public function login(Request $request){
+    public function login()
+    {
         return view("back.pages.admin.auth.login");
     }
 
+    //////
+    
     public function loginHandler(Request $request)
     {
         $feldtype = filter_var($request->login_id, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
